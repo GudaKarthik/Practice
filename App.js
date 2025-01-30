@@ -30,6 +30,10 @@ export default function App() {
         Click here
       </Text>
 
+      <Text>
+        This is from git
+      </Text>
+
       <Text>My name is {txtName}</Text>
 
       <Text>It is rendering {count}</Text>
