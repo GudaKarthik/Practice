@@ -1,38 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef, use, useMemo} from 'react';
 
 export default function App() {
 
-  const [count,setCount]= useState(0)
-  const [name,setName] = useState('')
-  const [txtName,setTxtname] = useState('')
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(0)
 
-  useEffect(() =>{
-    setTimeout(() =>{
-      setCount(count=>count+1)
-    },1000)
-  },[])
+  const calcValue = useMemo(()=>calculate(number),[number])
+
+  function calculate(num){
+    console.log("Calculation")
+    return Math.pow(num,2)
+  }
 
   return (
     <View style={styles.container}>
+
       <TextInput
-      placeholder='Enter your name'
-      onChangeText={prev => setName(prev)}
-      
-      ></TextInput>
+      placeholder='Enter number'
+      onChangeText={prev=>setNumber(prev)}
+      />
 
-      <Text
+      <Text>Number : {calcValue}</Text>
+
+      <Text>Count : {count}</Text>
+
+      <Button
+      title='+1'
       onPress={() =>{
-        setTxtname(name)
+        setCount(count+1)
       }}
-      >
-        Click here
-      </Text>
+      />
 
-      <Text>My name is {txtName}</Text>
-
-      <Text>It is rendering {count}</Text>
       <StatusBar style="auto" />
     </View>
   );
